@@ -1,10 +1,13 @@
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import FormError from "../components/form-error";
+import Logo from "../images/logo.svg";
 import {
   LoginMutation,
   LoginMutationVariables,
 } from "../__generated__/LoginMutation";
+import Button from "./button";
 
 // Define mutation
 const LOGIN_MUTATION = gql`
@@ -27,8 +30,10 @@ function Login() {
     register,
     getValues,
     handleSubmit,
-    formState: { errors },
-  } = useForm<ILoginForm>();
+    formState: { errors, isValid },
+  } = useForm<ILoginForm>({
+    mode: "onChange",
+  });
 
   const onCompleted = (data: LoginMutation) => {
     const {
@@ -60,12 +65,18 @@ function Login() {
     }
   };
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-800">
-      <div className="bg-white w-full max-w-md pt-3 pb-6 rounded-lg text-center">
-        <h3 className=" text-3xl text-gray-800">Log In</h3>
+    <div className="h-full flex items-center flex-col mt-7 lg:mt-32 ">
+      <div className="w-full max-w-screen-sm flex flex-col items-center px-5">
+        <img src={Logo} alt="uber eats" className="w-48 mb-9" />
+        <h4 className="w-full font-medium text-left text-2xl mb-7">
+          돌아오신 것을 환영합니다
+        </h4>
+        <h6 className="w-full font-light text-left text-sm mb-2">
+          이메일 주소로 로그인하세요.
+        </h6>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid gap-3 mt-5 px-5"
+          className="grid gap-3 mb-3 w-full"
         >
           <input
             {...register("email", { required: "Email is required." })}
@@ -91,13 +102,18 @@ function Login() {
           {errors.password?.message && (
             <FormError errorMessage={errors.password.message} />
           )}
-          <button className="btn mt-3">
-            {loading ? "Loading..." : "Log In"}
-          </button>
+          <Button canClick={isValid} loading={loading} actionText="Log in" />
+
           {loginMutationResult?.login.error && (
             <FormError errorMessage={loginMutationResult.login.error} />
           )}
         </form>
+        <div>
+          Uber는 처음이신가요?{" "}
+          <Link to="/create-account" className="text-lime-600 hover:underline">
+            계정 만들기
+          </Link>
+        </div>
       </div>
     </div>
   );
