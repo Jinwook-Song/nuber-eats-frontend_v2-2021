@@ -1,10 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { authTokenVar, isLoggedInVar } from "../apollo";
+import Header from "../components/header";
+import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
 import { UBER_AUTH_TOKEN } from "../types";
 import { UserRole } from "../__generated__/globalTypes";
-import { MyProfileQuery } from "../__generated__/MyProfileQuery";
 
 const ClientRoutes = () => {
   return (
@@ -15,23 +15,8 @@ const ClientRoutes = () => {
   );
 };
 
-const MY_PROFILE_QUERY = gql`
-  query MyProfileQuery {
-    myProfile {
-      id
-      email
-      role
-      verified
-    }
-  }
-`;
-
 function LoggedInRouter() {
-  const {
-    error,
-    loading,
-    data: myProfileResult,
-  } = useQuery<MyProfileQuery>(MY_PROFILE_QUERY);
+  const { error, loading, data: myProfileResult } = useMyProfile();
 
   // invalid Token
   if (error) {
@@ -50,6 +35,7 @@ function LoggedInRouter() {
 
   return (
     <BrowserRouter>
+      <Header />
       {myProfileResult.myProfile.role === UserRole.Client && <ClientRoutes />}
     </BrowserRouter>
   );
