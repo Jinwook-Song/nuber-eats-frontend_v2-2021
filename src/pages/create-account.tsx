@@ -1,4 +1,4 @@
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import {
   CreateAccountMutationVariables,
 } from "../__generated__/CreateAccountMutation";
 import { UserRole } from "../__generated__/globalTypes";
-import { EMAIL_VALIDATION_CHECK } from "../components/types";
+import { EMAIL_VALIDATION_CHECK } from "../types";
 
 // Define mutation
 const CREATE_ACCOUNT_MUTATION = gql`
@@ -47,6 +47,7 @@ function CreateAccount() {
       createAccount: { ok },
     } = data;
     if (ok) {
+      alert("Account Created🎉 Log in now!");
       navigate("/login");
     }
   };

@@ -1,4 +1,4 @@
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -9,8 +9,8 @@ import {
   LoginMutationVariables,
 } from "../__generated__/LoginMutation";
 import Button from "./button";
-import { EMAIL_VALIDATION_CHECK } from "../components/types";
-import { isLoggedInVar } from "../apollo";
+import { EMAIL_VALIDATION_CHECK, UBER_AUTH_TOKEN } from "../types";
+import { authToken, isLoggedInVar } from "../apollo";
 
 // Define mutation
 const LOGIN_MUTATION = gql`
@@ -43,7 +43,9 @@ function Login() {
       login: { ok, token },
     } = data;
     if (ok) {
-      console.log(token);
+      // save token
+      localStorage.setItem(UBER_AUTH_TOKEN, token!);
+      authToken(token);
       isLoggedInVar(true);
     }
   };

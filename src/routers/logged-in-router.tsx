@@ -1,7 +1,10 @@
-import { isLoggedInVar } from "../apollo";
+import { authToken, isLoggedInVar } from "../apollo";
+import { UBER_AUTH_TOKEN } from "../types";
 
 function LoggedInRouter() {
   const onClick = () => {
+    localStorage.removeItem(UBER_AUTH_TOKEN);
+    authToken(null);
     isLoggedInVar(false);
   };
   return (

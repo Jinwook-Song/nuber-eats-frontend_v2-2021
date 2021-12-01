@@ -1,6 +1,10 @@
-import { ApolloClient, InMemoryCache ,makeVar} from "@apollo/client";
+import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+import { UBER_AUTH_TOKEN } from "./types";
 
-export const isLoggedInVar = makeVar(false)
+const token = localStorage.getItem(UBER_AUTH_TOKEN);
+
+export const isLoggedInVar = makeVar(Boolean(token));
+export const authToken = makeVar(token);
 
 export const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
@@ -10,11 +14,16 @@ export const client = new ApolloClient({
         fields: {
           isLoggedIn: {
             read() {
-              return isLoggedInVar
-            }
-          }
-        }
-      }
-    }
-  })
+              return isLoggedInVar();
+            },
+          },
+          token: {
+            read() {
+              return authToken();
+            },
+          },
+        },
+      },
+    },
+  }),
 });
