@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import FormError from "../components/form-error";
 
 interface ILoginForm {
   email: string;
@@ -21,18 +22,16 @@ function Login() {
         <h3 className=" text-3xl text-gray-800">Log In</h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid gap-2 mt-5 px-5"
+          className="grid gap-3 mt-5 px-5"
         >
           <input
             {...register("email", { required: "Email is required." })}
             type="email"
             placeholder="Email"
-            className="input mb-3"
+            className="input"
           />
           {errors.email?.message && (
-            <span className="mb-2 font-medium text-red-500">
-              {errors.email?.message}
-            </span>
+            <FormError errorMessage={errors.email.message} />
           )}
           <input
             {...register("password", {
@@ -47,9 +46,7 @@ function Login() {
             className="input"
           />
           {errors.password?.message && (
-            <span className="mt-2 font-medium text-red-500">
-              {errors.password?.message}
-            </span>
+            <FormError errorMessage={errors.password.message} />
           )}
           <button className="btn mt-3">Log In</button>
         </form>
