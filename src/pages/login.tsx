@@ -1,3 +1,4 @@
+import Helmet from "react-helmet";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -8,6 +9,8 @@ import {
   LoginMutationVariables,
 } from "../__generated__/LoginMutation";
 import Button from "./button";
+import { EMAIL_VALIDATION_CHECK } from "../components/types";
+import { isLoggedInVar } from "../apollo";
 
 // Define mutation
 const LOGIN_MUTATION = gql`
@@ -41,6 +44,7 @@ function Login() {
     } = data;
     if (ok) {
       console.log(token);
+      isLoggedInVar(true);
     }
   };
 
@@ -66,6 +70,9 @@ function Login() {
   };
   return (
     <div className="h-full flex items-center flex-col mt-7 lg:mt-32 ">
+      <Helmet>
+        <title>Login | Uber Eats</title>
+      </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col items-center px-5">
         <img src={Logo} alt="uber eats" className="w-48 mb-9" />
         <h4 className="w-full font-medium text-left text-2xl mb-7">
@@ -79,7 +86,13 @@ function Login() {
           className="grid gap-3 mb-3 w-full"
         >
           <input
-            {...register("email", { required: "Email is required." })}
+            {...register("email", {
+              required: "Email is required.",
+              pattern: {
+                value: EMAIL_VALIDATION_CHECK,
+                message: "Please enter a valid email.",
+              },
+            })}
             type="email"
             placeholder="Email"
             className="input"
