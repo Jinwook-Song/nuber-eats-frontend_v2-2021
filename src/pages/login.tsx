@@ -10,7 +10,7 @@ import {
 } from "../__generated__/LoginMutation";
 import Button from "./button";
 import { EMAIL_VALIDATION_CHECK, UBER_AUTH_TOKEN } from "../types";
-import { authToken, isLoggedInVar } from "../apollo";
+import { authTokenVar, isLoggedInVar } from "../apollo";
 
 // Define mutation
 const LOGIN_MUTATION = gql`
@@ -45,7 +45,7 @@ function Login() {
     if (ok) {
       // save token
       localStorage.setItem(UBER_AUTH_TOKEN, token!);
-      authToken(token);
+      authTokenVar(token);
       isLoggedInVar(true);
     }
   };

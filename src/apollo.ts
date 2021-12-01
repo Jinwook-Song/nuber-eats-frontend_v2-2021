@@ -1,13 +1,33 @@
-import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  makeVar,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import { UBER_AUTH_TOKEN } from "./types";
 
 const token = localStorage.getItem(UBER_AUTH_TOKEN);
 
 export const isLoggedInVar = makeVar(Boolean(token));
-export const authToken = makeVar(token);
+export const authTokenVar = makeVar(token);
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:5000/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      "x-jwt": authTokenVar() || "",
+    },
+  };
+});
 
 export const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -19,7 +39,7 @@ export const client = new ApolloClient({
           },
           token: {
             read() {
-              return authToken();
+              return authTokenVar();
             },
           },
         },
