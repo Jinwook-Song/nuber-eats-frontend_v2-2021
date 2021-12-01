@@ -1,11 +1,15 @@
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import FormError from "../components/form-error";
+import {
+  LoginMutation,
+  LoginMutationVariables,
+} from "../__generated__/LoginMutation";
 
 // Define mutation
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(input: { email: $email, password: $password }) {
+  mutation LoginMutation($loginInput: LoginInput!) {
+    login(input: $loginInput) {
       ok
       token
       error
@@ -19,21 +23,27 @@ interface ILoginForm {
 }
 
 function Login() {
-  const [loginMutation, { loading, error, data }] = useMutation(LOGIN_MUTATION);
   const {
     register,
-    getValues,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>();
-  const onSubmit = () => {
-    const { email, password } = getValues();
-    loginMutation({
-      variables: {
-        email,
-        password,
+
+  const [loginMutationFn, { loading, error, data }] = useMutation<
+    LoginMutation,
+    LoginMutationVariables
+  >(LOGIN_MUTATION, {
+    variables: {
+      loginInput: {
+        email: watch("email"),
+        password: watch("password"),
       },
-    });
+    },
+  });
+
+  const onSubmit = () => {
+    loginMutationFn(); // if Valid, this fn exe.
   };
   return (
     <div className="h-screen flex items-center justify-center bg-gray-800">
