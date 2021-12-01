@@ -25,25 +25,39 @@ interface ILoginForm {
 function Login() {
   const {
     register,
-    watch,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>();
 
-  const [loginMutationFn, { loading, error, data }] = useMutation<
+  const onCompleted = (data: LoginMutation) => {
+    const {
+      login: { ok, token },
+    } = data;
+    if (ok) {
+      console.log(token);
+    }
+  };
+
+  const [loginMutationFn, { data: loginMutationResult, loading }] = useMutation<
     LoginMutation,
     LoginMutationVariables
   >(LOGIN_MUTATION, {
-    variables: {
-      loginInput: {
-        email: watch("email"),
-        password: watch("password"),
-      },
-    },
+    onCompleted,
   });
 
   const onSubmit = () => {
-    loginMutationFn(); // if Valid, this fn exe.
+    if (!loading) {
+      const { email, password } = getValues();
+      loginMutationFn({
+        variables: {
+          loginInput: {
+            email,
+            password,
+          },
+        },
+      }); // if Valid, this fn exe.
+    }
   };
   return (
     <div className="h-screen flex items-center justify-center bg-gray-800">
@@ -77,7 +91,12 @@ function Login() {
           {errors.password?.message && (
             <FormError errorMessage={errors.password.message} />
           )}
-          <button className="btn mt-3">Log In</button>
+          <button className="btn mt-3">
+            {loading ? "Loading..." : "Log In"}
+          </button>
+          {loginMutationResult?.login.error && (
+            <FormError errorMessage={loginMutationResult.login.error} />
+          )}
         </form>
       </div>
     </div>
