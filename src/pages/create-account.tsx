@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import FormError from "../components/form-error";
 import Logo from "../images/logo.svg";
-import Button from "./button";
+import Button from "../components/button";
 import {
   CreateAccountMutation,
   CreateAccountMutationVariables,

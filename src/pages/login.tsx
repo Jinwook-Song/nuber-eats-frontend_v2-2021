@@ -8,7 +8,7 @@ import {
   LoginMutation,
   LoginMutationVariables,
 } from "../__generated__/LoginMutation";
-import Button from "./button";
+import Button from "../components/button";
 import { EMAIL_VALIDATION_CHECK, UBER_AUTH_TOKEN } from "../types";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 

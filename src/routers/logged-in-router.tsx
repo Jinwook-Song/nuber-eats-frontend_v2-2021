@@ -1,7 +1,19 @@
 import { gql, useQuery } from "@apollo/client";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { authTokenVar, isLoggedInVar } from "../apollo";
+import Restaurants from "../pages/client/restaurants";
 import { UBER_AUTH_TOKEN } from "../types";
+import { UserRole } from "../__generated__/globalTypes";
 import { MyProfileQuery } from "../__generated__/MyProfileQuery";
+
+const ClientRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Restaurants />} />;
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+};
 
 const MY_PROFILE_QUERY = gql`
   query MyProfileQuery {
@@ -35,16 +47,11 @@ function LoggedInRouter() {
       </div>
     );
   }
-  const onClick = () => {
-    localStorage.removeItem(UBER_AUTH_TOKEN);
-    authTokenVar(null);
-    isLoggedInVar(false);
-  };
+
   return (
-    <div>
-      <h1>{myProfileResult.myProfile.role}</h1>
-      <button onClick={onClick}>Logout &rarr;</button>
-    </div>
+    <BrowserRouter>
+      {myProfileResult.myProfile.role === UserRole.Client && <ClientRoutes />}
+    </BrowserRouter>
   );
 }
 
