@@ -15,12 +15,27 @@ function Banner() {
     <div
       className="w-full h-screen"
       style={{
-        backgroundColor: color,
+        backgroundColor: color ? color : "#FFC043",
         backgroundImage: `url(${image ? image : Bg_01})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
       }}
-    ></div>
+    >
+      <div className="px-4 xl:px-2 max-w-screen-xl mx-auto pt-96 flex flex-col">
+        <h2 className="text-5xl font-bold pb-10 whitespace-nowrap">
+          Order food to your door
+        </h2>
+        <div className="flex space">
+          <input
+            placeholder="Restaurants"
+            className="w-full mr-3 p-3 focus:outline-none border-b-2 focus:border-black"
+          />
+          <button className="px-5 py-3 bg-black whitespace-nowrap text-white text-extrabold hover:opacity-80">
+            Find Food
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
