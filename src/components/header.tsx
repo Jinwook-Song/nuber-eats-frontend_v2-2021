@@ -1,11 +1,24 @@
 import Logo from "../images/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
 import useMyProfile from "../hooks/useMyProfile";
+import { authTokenVar, isLoggedInVar } from "../apollo";
+import { UBER_AUTH_TOKEN } from "../types";
 
 function Header() {
   const { data } = useMyProfile();
+  const navigate = useNavigate();
+
+  // logout
+  const onClick = () => {
+    localStorage.removeItem(UBER_AUTH_TOKEN);
+    authTokenVar(null);
+    isLoggedInVar(false);
+
+    navigate("/");
+  };
+
   return (
     <>
       {!data?.myProfile.verified && (
@@ -20,8 +33,17 @@ function Header() {
           </Link>
           <span className="text-xs">
             <Link to="/edit-profile">
-              <FontAwesomeIcon icon={faUser} className="text-2xl" />
+              <FontAwesomeIcon
+                icon={faUser}
+                className="text-2xl mr-4 hover:opacity-80"
+              />
             </Link>
+            <button onClick={onClick}>
+              <FontAwesomeIcon
+                className="text-2xl hover:opacity-80"
+                icon={faSignOutAlt}
+              />
+            </button>
           </span>
         </div>
       </header>
