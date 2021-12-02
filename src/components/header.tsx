@@ -22,7 +22,7 @@ function Header() {
   return (
     <>
       {!data?.myProfile.verified && (
-        <div className="bg-red-500 p-9 text-center text-xs text-white opacity-95 fixed top-0 w-full">
+        <div className="bg-red-500 p-8 text-center text-lg text-white opacity-95 fixed top-0 w-full">
           <span>Please verify your email.</span>
         </div>
       )}

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import useMyProfile from "../../hooks/useMyProfile";
 import Spacing from "../../components/spacing";
 import Button from "../../components/button";
@@ -8,6 +8,7 @@ import {
   EditProfile,
   EditProfileVariables,
 } from "../../__generated__/EditProfile";
+import { useNavigate } from "react-router";
 
 const EDIT_PROFILE_MUTATION = gql`
   mutation EditProfile($input: EditProfileInput!) {
@@ -25,14 +26,36 @@ interface IFormProps {
 
 function UpdateProfile() {
   const { data: myProfileResult } = useMyProfile();
+  const client = useApolloClient();
+  const navigate = useNavigate();
 
   const onCompleted = (data: EditProfile) => {
     const {
       editProfile: { ok },
     } = data;
-    if (ok) {
+    if (ok && myProfileResult) {
+      const {
+        myProfile: { email: prevEmail, id },
+      } = myProfileResult;
+      const newEmail = getValues("email");
       // update the cache
+      if (prevEmail !== newEmail) {
+        client.writeFragment({
+          id: `User:${id}`,
+          fragment: gql`
+            fragment EditedUser on User {
+              verified
+              email
+            }
+          `,
+          data: {
+            verified: false,
+            email: newEmail,
+          },
+        });
+      }
     }
+    navigate("/");
   };
 
   const [editProfileMutationFn, { loading }] = useMutation<
