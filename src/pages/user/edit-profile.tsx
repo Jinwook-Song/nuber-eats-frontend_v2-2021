@@ -9,6 +9,7 @@ import {
   EditProfileVariables,
 } from "../../__generated__/EditProfile";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const EDIT_PROFILE_MUTATION = gql`
   mutation EditProfile($input: EditProfileInput!) {
@@ -93,6 +94,9 @@ function UpdateProfile() {
     <>
       <Spacing />
       <div className="mt-52 flex flex-col justify-center items-center">
+        <Helmet>
+          <title>Edit Profile | Uber Eats</title>
+        </Helmet>
         <h4 className="font-semibold text-2xl mb-3">Edit Profile</h4>
         <form
           onSubmit={handleSubmit(onSubmit)}

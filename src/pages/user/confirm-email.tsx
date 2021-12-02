@@ -6,6 +6,7 @@ import {
   VerifyEmailVariables,
 } from "../../__generated__/VerifyEmail";
 import useMyProfile from "../../hooks/useMyProfile";
+import { Helmet } from "react-helmet-async";
 
 const VERIFY_EMAIL_MUTATION = gql`
   mutation VerifyEmail($input: VerifyEmailInput!) {
@@ -63,6 +64,9 @@ function ConfirmEmail() {
 
   return (
     <div className="mt-52 flex flex-col items-center justify-center">
+      <Helmet>
+        <title>Verify Email | Uber Eats</title>
+      </Helmet>
       <h2 className="text-lg mb-1 font-medium">Confirming email...</h2>
       <h4 className="text-gray-700 text-sm">
         Please wait, don't close this page...
