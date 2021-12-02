@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import {
   VerifyEmail,
   VerifyEmailVariables,
 } from "../../__generated__/VerifyEmail";
+import useMyProfile from "../../hooks/useMyProfile";
 
 const VERIFY_EMAIL_MUTATION = gql`
   mutation VerifyEmail($input: VerifyEmailInput!) {
@@ -15,10 +16,34 @@ const VERIFY_EMAIL_MUTATION = gql`
 `;
 
 function ConfirmEmail() {
+  const { data: userData } = useMyProfile();
+  const client = useApolloClient();
+  const onCompleted = (data: VerifyEmail) => {
+    const {
+      verifyEmail: { ok },
+    } = data;
+    if (ok && userData?.myProfile.id) {
+      // write caching
+      client.writeFragment({
+        id: `User:${userData.myProfile.id}`,
+        fragment: gql`
+          fragment VerifiedUser on User {
+            verified
+          }
+        `,
+        data: {
+          verified: true,
+        },
+      });
+    }
+  };
+
   const [verifyEmailMutationFn] = useMutation<
     VerifyEmail,
     VerifyEmailVariables
-  >(VERIFY_EMAIL_MUTATION);
+  >(VERIFY_EMAIL_MUTATION, {
+    onCompleted,
+  });
 
   useEffect(() => {
     const code = window.location.href.split("code=")[1];
