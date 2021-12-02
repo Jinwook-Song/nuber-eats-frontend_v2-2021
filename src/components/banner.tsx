@@ -18,7 +18,7 @@ function Banner() {
         backgroundColor: color ? color : "#FFC043",
         backgroundImage: `url(${image ? image : Bg_01})`,
         backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundPosition: "right top",
       }}
     >
       <div className="px-4 xl:px-2 max-w-screen-xl mx-auto pt-96 flex flex-col">
@@ -28,7 +28,7 @@ function Banner() {
         <div className="flex space">
           <input
             placeholder="Restaurants"
-            className="w-full md:w-3/4 mr-3 p-3 focus:outline-none border-b-2 focus:border-black"
+            className="w-full md:w-3/4 mr-3 p-3 focus:outline-none border-b-2 focus:border-black transition-colors"
           />
           <button className="px-5 py-3 bg-black whitespace-nowrap text-white text-extrabold hover:opacity-80">
             Find Food

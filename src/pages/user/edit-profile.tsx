@@ -1,17 +1,107 @@
-import useMyProfile from '../../hooks/useMyProfile'
-import Spacing from '../../components/spacing'
+import { useForm } from "react-hook-form";
+import { gql, useMutation } from "@apollo/client";
+import useMyProfile from "../../hooks/useMyProfile";
+import Spacing from "../../components/spacing";
+import Button from "../../components/button";
+import { EMAIL_VALIDATION_CHECK } from "../../types";
+import {
+  EditProfile,
+  EditProfileVariables,
+} from "../../__generated__/EditProfile";
 
+const EDIT_PROFILE_MUTATION = gql`
+  mutation EditProfile($input: EditProfileInput!) {
+    editProfile(input: $input) {
+      ok
+      error
+    }
+  }
+`;
 
-function EditProfile() {
-      const { error, loading, data: myProfileResult } = useMyProfile();
-    return (
-    <>
-    <Spacing />
-    <h4 className='bg-black'>Edit Profile</h4>
-    </>
-    )
-
-
+interface IFormProps {
+  email?: string;
+  password?: string;
 }
 
-export default EditProfile;
+function UpdateProfile() {
+  const { data: myProfileResult } = useMyProfile();
+
+  const onCompleted = (data: EditProfile) => {
+    const {
+      editProfile: { ok },
+    } = data;
+    if (ok) {
+      // update the cache
+    }
+  };
+
+  const [editProfileMutationFn, { loading }] = useMutation<
+    EditProfile,
+    EditProfileVariables
+  >(EDIT_PROFILE_MUTATION, {
+    onCompleted,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { isValid },
+  } = useForm<IFormProps>({
+    mode: "onChange",
+    defaultValues: {
+      email: myProfileResult?.myProfile.email,
+    },
+  });
+
+  const onSubmit = () => {
+    const { email, password } = getValues();
+    editProfileMutationFn({
+      variables: {
+        input: {
+          email,
+          ...(password !== "" && { password }),
+        },
+      },
+    });
+  };
+
+  return (
+    <>
+      <Spacing />
+      <div className="mt-52 flex flex-col justify-center items-center">
+        <h4 className="font-semibold text-2xl mb-3">Edit Profile</h4>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"
+        >
+          <input
+            {...register("email", {
+              required: "Email is required.",
+              pattern: {
+                value: EMAIL_VALIDATION_CHECK,
+                message: "Please enter a valid email.",
+              },
+            })}
+            className="input"
+            type="email"
+            placeholder="Email"
+          />
+          <input
+            {...register("password")}
+            className="input"
+            type="password"
+            placeholder="Password"
+          />
+          <Button
+            loading={loading}
+            canClick={isValid}
+            actionText="Save Profile"
+          />
+        </form>
+      </div>
+    </>
+  );
+}
+
+export default UpdateProfile;
