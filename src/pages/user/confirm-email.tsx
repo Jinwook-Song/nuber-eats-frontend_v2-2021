@@ -17,7 +17,7 @@ const VERIFY_EMAIL_MUTATION = gql`
 `;
 
 function ConfirmEmail() {
-  const { data: userData } = useMyProfile();
+  const { data: userData, refetch } = useMyProfile();
   const client = useApolloClient();
   const navigate = useNavigate();
   const onCompleted = (data: VerifyEmail) => {
@@ -38,7 +38,7 @@ function ConfirmEmail() {
         },
       });
     }
-    navigate(-1);
+    refetch().then(() => navigate(-1));
   };
 
   const [verifyEmailMutationFn] = useMutation<

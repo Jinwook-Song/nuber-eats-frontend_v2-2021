@@ -7,8 +7,10 @@ import { authTokenVar, isLoggedInVar } from "../apollo";
 import { UBER_AUTH_TOKEN } from "../types";
 
 function Header() {
-  const { data } = useMyProfile();
+  const { data, refetch } = useMyProfile();
   const navigate = useNavigate();
+
+  refetch();
 
   // logout
   const onClick = () => {
