@@ -4,6 +4,7 @@ import Header from "../components/header";
 import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
 import ConfirmEmail from "../pages/user/confirm-email";
+import EditProfile from "../pages/user/edit-profile";
 import { UBER_AUTH_TOKEN } from "../types";
 import { UserRole } from "../__generated__/globalTypes";
 
@@ -12,6 +13,7 @@ const ClientRoutes = () => {
     <Routes>
       <Route path="/" element={<Restaurants />} />;
       <Route path="/confirm" element={<ConfirmEmail />} />;
+      <Route path="/edit-profile" element={<EditProfile />} />;
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -19,7 +19,7 @@ function Header() {
             <img src={Logo} className="w-40" alt="uber eats" />
           </Link>
           <span className="text-xs">
-            <Link to="/my-profile">
+            <Link to="/edit-profile">
               <FontAwesomeIcon icon={faUser} className="text-2xl" />
             </Link>
           </span>
