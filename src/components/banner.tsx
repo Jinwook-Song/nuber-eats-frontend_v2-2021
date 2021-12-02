@@ -16,13 +16,11 @@ function Banner() {
       className="w-full h-screen"
       style={{
         backgroundColor: color,
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${image ? image : Bg_01})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
       }}
-    >
-      {/* <img src={image} alt="banner" /> */}
-    </div>
+    ></div>
   );
 }
 

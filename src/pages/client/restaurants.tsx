@@ -1,5 +1,12 @@
+import Banner from "../../components/banner";
+
 function Restaurants() {
-  return <div>Restaurants</div>;
+  return (
+    <>
+      <Banner />
+      <div>Restaurants</div>
+    </>
+  );
 }
 
 export default Restaurants;

@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import Header from "../components/header";
-import Banner from "../components/banner";
 import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
+import ConfirmEmail from "../pages/user/confirm-email";
 import { UBER_AUTH_TOKEN } from "../types";
 import { UserRole } from "../__generated__/globalTypes";
 
@@ -11,6 +11,7 @@ const ClientRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Restaurants />} />;
+      <Route path="/confirm" element={<ConfirmEmail />} />;
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
@@ -37,7 +38,6 @@ function LoggedInRouter() {
   return (
     <BrowserRouter>
       <Header />
-      <Banner />
       {myProfileResult.myProfile.role === UserRole.Client && <ClientRoutes />}
     </BrowserRouter>
   );
