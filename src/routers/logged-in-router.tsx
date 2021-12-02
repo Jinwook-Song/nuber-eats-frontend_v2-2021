@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import Header from "../components/header";
+import Banner from "../components/banner";
 import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
 import { UBER_AUTH_TOKEN } from "../types";
@@ -36,6 +37,7 @@ function LoggedInRouter() {
   return (
     <BrowserRouter>
       <Header />
+      <Banner />
       {myProfileResult.myProfile.role === UserRole.Client && <ClientRoutes />}
     </BrowserRouter>
   );
