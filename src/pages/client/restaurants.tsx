@@ -1,5 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
-import {  useState } from "react";
+import { faBars, faSortDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import AllRestaurants from "../../components/all-restaurants";
 import Banner from "../../components/banner";
 import Category from "../../components/category";
@@ -42,6 +44,7 @@ const RESTAURANTS_QUERY = gql`
 
 function Restaurants() {
   const [page, setPage] = useState(1);
+  const [showAllCategory, setShowAllCategory] = useState(false);
   const { data, loading } = useQuery<
     RestaurantsPageQuery,
     RestaurantsPageQueryVariables
@@ -61,8 +64,18 @@ function Restaurants() {
       <Banner />
       {!loading && (
         <div className="px-4 xl:px-2 max-w-screen-xl mx-auto mt-10 flex flex-col">
-          <h3 className="text-4xl font-bold mb-5">Explore by category</h3>
-          <div className="grid w-3/4 self-center sm:grid-cols-2 sm:w-full  md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <h3 className="text-4xl font-bold mb-5">
+            Explore by category
+            <FontAwesomeIcon
+              onClick={() => setShowAllCategory((prev) => !prev)}
+              icon={showAllCategory ? faSortDown : faBars}
+              className="text-3xl ml-4 cursor-pointer"
+            />
+          </h3>
+          <div
+            className="grid w-3/4 self-center sm:grid-cols-2 sm:w-5/6  md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-hidden"
+            style={{ height: showAllCategory ? "auto" : "7rem" }}
+          >
             {data?.allCategories.categories?.map(({ name, coverImg }) => (
               <Category key={name} name={name} coverImg={coverImg} />
             ))}
