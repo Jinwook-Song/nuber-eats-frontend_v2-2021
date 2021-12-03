@@ -27,7 +27,8 @@ function Banner() {
         </h2>
         <div className="flex space">
           <input
-            placeholder="Restaurants"
+            type="Search"
+            placeholder="Search Restaurants..."
             className="w-full md:w-3/4 mr-3 p-3 focus:outline-none border-b-2 focus:border-black transition-colors"
           />
           <button className="px-5 py-3 bg-black whitespace-nowrap text-white text-extrabold hover:opacity-80">
