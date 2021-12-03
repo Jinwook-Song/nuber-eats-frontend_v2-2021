@@ -1,10 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
 import Banner from "../../components/banner";
+import Category from "../../components/category";
 import {
   RestaurantsPageQuery,
   RestaurantsPageQueryVariables,
 } from "../../__generated__/RestaurantsPageQuery";
-import american from "../../images/categories/american.png";
 
 const RESTAURANTS_QUERY = gql`
   query RestaurantsPageQuery($input: RestaurantsInput!) {
@@ -57,20 +57,35 @@ function Restaurants() {
       {!loading && (
         <div className="px-4 xl:px-2 max-w-screen-xl mx-auto mt-10 flex flex-col">
           <h3 className="text-4xl font-bold mb-5">Explore by category</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data?.allCategories.categories?.map((category) => (
-              <div
-                key={category.name}
-                className="w-full h-24 grid grid-cols-3 relative cursor-pointer bg-yellow-50 hover:bg-yellow-100 transition-colors"
-              >
-                <h5 className="p-3 font-medium text-xl col-span-2 capitalize hover:underline ">
-                  {category.name}
-                </h5>
+          <div className="grid w-3/4 self-center sm:grid-cols-2 sm:w-full  md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data?.allCategories.categories?.map(({ name, coverImg }) => (
+              <Category key={name} name={name} coverImg={coverImg} />
+            ))}
+          </div>
+          <hr className="m-10 w-full self-center" />
+
+          <h3 className="text-4xl font-bold mb-5">Restaurants</h3>
+          <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4 mb-10 ">
+            {data?.restaurants.results?.map((restaurant) => (
+              <div className="w-full h-40 grid grid-cols-5 overflow-hidden">
                 <img
-                  className="w-1/3 h-full rounded-full absolute -right-2 -bottom-2"
-                  src={category.coverImg ? category.coverImg : american}
-                  alt={category.name}
+                  className="col-span-3 w-full h-full"
+                  src={restaurant.coverImg}
+                  style={{
+                    backgroundSize: "cover",
+                    backgroundPosition: "right top",
+                  }}
+                  alt={restaurant.name}
                 />
+                <div className="col-span-2 ml-3 flex flex-col">
+                  <h5 className="font-bold text-lg">{restaurant.name}</h5>
+                  <span className="opacity-70 mb-1 font-light capitalize">
+                    {restaurant.category?.name}
+                  </span>
+                  <span className="opacity-70 font-light">
+                    {restaurant.address}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
