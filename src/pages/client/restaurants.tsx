@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import {  useState } from "react";
 import AllRestaurants from "../../components/all-restaurants";
 import Banner from "../../components/banner";
 import Category from "../../components/category";
@@ -40,18 +41,21 @@ const RESTAURANTS_QUERY = gql`
 `;
 
 function Restaurants() {
+  const [page, setPage] = useState(1);
   const { data, loading } = useQuery<
     RestaurantsPageQuery,
     RestaurantsPageQueryVariables
   >(RESTAURANTS_QUERY, {
     variables: {
       input: {
-        page: 1,
+        page,
       },
     },
   });
 
-  console.log(data, loading);
+  const onNextPageClick = () => setPage((current) => current + 1);
+  const onPrevPageClick = () => setPage((current) => current - 1);
+
   return (
     <>
       <Banner />
@@ -67,11 +71,12 @@ function Restaurants() {
           <hr className="m-10 w-full self-center" />
 
           <h3 className="text-4xl font-bold mb-5">Restaurants</h3>
-          <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4 mb-10 ">
+          <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {data?.restaurants.results?.map(
-              ({ coverImg, name, category, address }, index) => (
+              ({ id, coverImg, name, category, address }) => (
                 <AllRestaurants
-                  key={index}
+                  key={id.toString()}
+                  id={id}
                   coverImg={coverImg}
                   name={name}
                   category={category}
@@ -80,6 +85,33 @@ function Restaurants() {
               )
             )}
           </div>
+          <div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-10">
+            {page > 1 ? (
+              <button
+                onClick={onPrevPageClick}
+                className="focus:outline-none font-medium text-2xl"
+              >
+                &larr;
+              </button>
+            ) : (
+              <div></div>
+            )}
+            <span>
+              Page {page} of {data?.restaurants.totalPages}
+            </span>
+            {page !== data?.restaurants.totalPages ? (
+              <button
+                onClick={onNextPageClick}
+                className="focus:outline-none font-medium text-2xl"
+              >
+                &rarr;
+              </button>
+            ) : (
+              <div></div>
+            )}
+          </div>
+
+          <hr className="m-10 w-full self-center" />
         </div>
       )}
     </>
