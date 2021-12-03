@@ -16,11 +16,13 @@ function Header() {
 
   // logout
   const onClick = () => {
-    localStorage.removeItem(UBER_AUTH_TOKEN);
-    authTokenVar(null);
-    isLoggedInVar(false);
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      localStorage.removeItem(UBER_AUTH_TOKEN);
+      authTokenVar(null);
+      isLoggedInVar(false);
 
-    navigate("/");
+      navigate("/");
+    }
   };
 
   const onScroll = () => {
