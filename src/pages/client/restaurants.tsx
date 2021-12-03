@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import {Helmet} from 'react-helmet-async'
 import { faBars, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -62,6 +63,9 @@ function Restaurants() {
   return (
     <>
       <Banner />
+      <Helmet>
+        <title>Uber Eats</title>
+      </Helmet>
       {!loading && (
         <div className="px-4 xl:px-2 max-w-screen-xl mx-auto mt-10 flex flex-col">
           <h3 className="text-4xl font-bold mb-5">

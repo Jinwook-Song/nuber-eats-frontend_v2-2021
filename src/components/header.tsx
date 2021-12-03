@@ -44,7 +44,7 @@ function Header() {
         </div>
       )}
       <header
-        className="py-8 fixed top-0 w-full z-10 transition-colors"
+        className="py-4 fixed top-0 w-full z-10 transition-colors"
         style={{
           backgroundColor: scrollY >= 100 ? "white" : "transparent",
         }}
@@ -53,6 +53,15 @@ function Header() {
           <Link to="/">
             <img src={Logo} className="w-40" alt="uber eats" />
           </Link>
+          <input
+            type="Search"
+            placeholder="Search Restaurants..."
+            className="w-2/5 p-4 focus:outline-none border-b-2 text-lime-600 bg-gray-100 focus:bg-gray-300 focus:placeholder-gray-50 transition-colors "
+            style={{
+              opacity: scrollY >= 500 ? "1" : "0",
+              transition: "opacity 0.5s ease-in-out",
+            }}
+          />
           <span className="text-xs">
             <Link to="/edit-profile">
               <FontAwesomeIcon
