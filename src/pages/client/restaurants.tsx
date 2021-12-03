@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import AllRestaurants from "../../components/all-restaurants";
 import Banner from "../../components/banner";
 import Category from "../../components/category";
 import {
@@ -62,32 +63,22 @@ function Restaurants() {
               <Category key={name} name={name} coverImg={coverImg} />
             ))}
           </div>
+
           <hr className="m-10 w-full self-center" />
 
           <h3 className="text-4xl font-bold mb-5">Restaurants</h3>
           <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4 mb-10 ">
-            {data?.restaurants.results?.map((restaurant) => (
-              <div className="w-full h-40 grid grid-cols-5 overflow-hidden">
-                <img
-                  className="col-span-3 w-full h-full"
-                  src={restaurant.coverImg}
-                  style={{
-                    backgroundSize: "cover",
-                    backgroundPosition: "right top",
-                  }}
-                  alt={restaurant.name}
+            {data?.restaurants.results?.map(
+              ({ coverImg, name, category, address }, index) => (
+                <AllRestaurants
+                  key={index}
+                  coverImg={coverImg}
+                  name={name}
+                  category={category}
+                  address={address}
                 />
-                <div className="col-span-2 ml-3 flex flex-col">
-                  <h5 className="font-bold text-lg">{restaurant.name}</h5>
-                  <span className="opacity-70 mb-1 font-light capitalize">
-                    {restaurant.category?.name}
-                  </span>
-                  <span className="opacity-70 font-light">
-                    {restaurant.address}
-                  </span>
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       )}
