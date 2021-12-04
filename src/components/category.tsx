@@ -11,7 +11,7 @@ function Category({
         {name}
       </h5>
       <img
-        className="w-1/3 h-full rounded-full absolute -right-2 -bottom-2"
+        className="bg-center bg-cover	w-20 h-20 rounded-full absolute -right-2 -bottom-2"
         src={coverImg ? coverImg : american}
         alt={name}
       />
