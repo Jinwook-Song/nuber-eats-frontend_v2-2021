@@ -70,7 +70,7 @@ function Search() {
                 {data.searchRestaurant.totalResults === 1
                   ? "1 Restaurant"
                   : `${data.searchRestaurant.totalResults} Restaurants`}{" "}
-                Available.
+                Found.
               </h3>
               <hr className="m-10 w-full self-center" />
               <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4">
