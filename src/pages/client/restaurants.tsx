@@ -54,7 +54,9 @@ function Restaurants() {
 
   return (
     <>
-      <Banner />
+      <div className="h-screen">
+        <Banner />
+      </div>
       <Helmet>
         <title>Uber Eats</title>
       </Helmet>

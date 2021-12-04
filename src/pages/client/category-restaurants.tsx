@@ -24,14 +24,15 @@ const CATEGORY_QUERY = gql`
 `;
 
 function CategoryRestauratns() {
-  const { slug } = useParams();
+  const params = useParams();
+  const slug = decodeURIComponent(params.slug as string);
 
   const { data, loading } = useQuery<Category, CategoryVariables>(
     CATEGORY_QUERY,
     {
       variables: {
         input: {
-          slug: slug!,
+          slug,
         },
       },
     }
