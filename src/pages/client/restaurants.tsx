@@ -10,6 +10,7 @@ import {
   RestaurantsPageQuery,
   RestaurantsPageQueryVariables,
 } from "../../__generated__/RestaurantsPageQuery";
+import { RESTAURANT_FRAGMENT } from "../../fragments";
 
 const RESTAURANTS_QUERY = gql`
   query RestaurantsPageQuery($input: RestaurantsInput!) {
@@ -30,17 +31,11 @@ const RESTAURANTS_QUERY = gql`
       totalPages
       totalResults
       results {
-        id
-        name
-        coverImg
-        category {
-          name
-        }
-        address
-        isPromoted
+        ...RestaurantParts
       }
     }
   }
+  ${RESTAURANT_FRAGMENT}
 `;
 
 function Restaurants() {

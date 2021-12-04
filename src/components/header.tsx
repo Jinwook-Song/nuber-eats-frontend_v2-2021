@@ -8,11 +8,13 @@ import { UBER_AUTH_TOKEN } from "../types";
 import { useEffect, useState } from "react";
 
 function Header() {
-  const { data } = useMyProfile();
+  const { data, refetch } = useMyProfile();
   const [scrollY, setScrollY] = useState(0);
   const navigate = useNavigate();
 
-  // refetch();
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   // logout
   const onClick = () => {

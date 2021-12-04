@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import Header from "../components/header";
 import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
+import Search from "../pages/client/search";
 import ConfirmEmail from "../pages/user/confirm-email";
 import UpdateProfile from "../pages/user/edit-profile";
 import { UBER_AUTH_TOKEN } from "../types";
@@ -14,7 +15,8 @@ const ClientRoutes = () => {
       <Route path="/" element={<Restaurants />} />;
       <Route path="/confirm" element={<ConfirmEmail />} />;
       <Route path="/edit-profile" element={<UpdateProfile />} />;
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/search" element={<Search />} />;
+      {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
     </Routes>
   );
 };
