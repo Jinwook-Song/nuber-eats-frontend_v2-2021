@@ -6,6 +6,11 @@ import useMyProfile from "../hooks/useMyProfile";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import { UBER_AUTH_TOKEN } from "../types";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface IFormProps {
+  searchingBy: string;
+}
 
 function Header() {
   const { data, refetch } = useMyProfile();
@@ -38,6 +43,12 @@ function Header() {
     };
   }, []);
 
+  const { register, handleSubmit, getValues } = useForm<IFormProps>();
+  const onSearchSubmit = () => {
+    const { searchingBy } = getValues();
+    navigate(`/search?term=${searchingBy}`);
+  };
+
   return (
     <>
       {!data?.myProfile.verified && (
@@ -55,8 +66,12 @@ function Header() {
           <Link to="/">
             <img src={Logo} className="w-40" alt="uber eats" />
           </Link>
-          <form className="w-1/2">
+          <form
+            onSubmit={handleSubmit(onSearchSubmit)}
+            className="w-1/2 hidden sm:block"
+          >
             <input
+              {...register("searchingBy", { required: true })}
               type="Search"
               placeholder="Search Restaurants..."
               className="w-full p-4 focus:outline-none border-b-2 text-lime-600 bg-gray-100 focus:bg-gray-300 focus:placeholder-gray-50 transition-colors "

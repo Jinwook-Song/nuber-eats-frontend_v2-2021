@@ -55,7 +55,8 @@ function Search() {
       <Helmet>
         <title>Search | Uber Eats</title>
       </Helmet>
-      <div>Searching by: </div>
+      <div>Searching by: {query}</div>
+      <span>Found {data?.searchRestaurant.totalResults} Restaurants.</span>
     </>
   );
 }
