@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import {Helmet} from 'react-helmet-async'
+import { Helmet } from "react-helmet-async";
 import { faBars, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -63,12 +63,12 @@ function Restaurants() {
       </Helmet>
       {!loading && (
         <div className="px-4 xl:px-2 max-w-screen-xl mx-auto mt-10 flex flex-col">
-          <h3 className="text-4xl font-bold mb-5">
+          <h3 className="text-2xl sm:text-4xl font-bold mb-5">
             Explore by category
             <FontAwesomeIcon
               onClick={() => setShowAllCategory((prev) => !prev)}
               icon={showAllCategory ? faSortDown : faBars}
-              className="text-3xl ml-4 cursor-pointer"
+              className="text-xl sm:text-3xl ml-4 cursor-pointer"
             />
           </h3>
           <div
@@ -82,7 +82,7 @@ function Restaurants() {
 
           <hr className="m-10 w-full self-center" />
 
-          <h3 className="text-4xl font-bold mb-5">Restaurants</h3>
+          <h3 className="text-2xl sm:text-4xl font-bold mb-5">Restaurants</h3>
           <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {data?.restaurants.results?.map(
               ({ id, coverImg, name, category, address }) => (

@@ -35,9 +35,7 @@ function Banner() {
       }}
     >
       <div className="px-4 xl:px-2 max-w-screen-xl mx-auto pt-96 flex flex-col">
-        <h2 className="text-5xl font-bold pb-10 whitespace-nowrap">
-          Order food to your door
-        </h2>
+        <h2 className="text-5xl font-bold pb-10">Order food to your door</h2>
         <form onSubmit={handleSubmit(onSearchSubmit)} className="flex">
           <input
             {...register("searchingBy", { required: true })}
