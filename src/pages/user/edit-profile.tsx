@@ -10,6 +10,7 @@ import {
 } from "../../__generated__/EditProfile";
 import { useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
+import FormError from "../../components/form-error";
 
 const EDIT_PROFILE_MUTATION = gql`
   mutation EditProfile($input: EditProfileInput!) {
@@ -70,7 +71,7 @@ function UpdateProfile() {
     register,
     handleSubmit,
     getValues,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm<IFormProps>({
     mode: "onChange",
     defaultValues: {
@@ -79,15 +80,17 @@ function UpdateProfile() {
   });
 
   const onSubmit = () => {
-    const { email, password } = getValues();
-    editProfileMutationFn({
-      variables: {
-        input: {
-          email,
-          ...(password !== "" && { password }),
+    if (window.confirm("변경사항을 저장하시겠습니까?")) {
+      const { email, password } = getValues();
+      editProfileMutationFn({
+        variables: {
+          input: {
+            email,
+            ...(password !== "" && { password }),
+          },
         },
-      },
-    });
+      });
+    }
   };
 
   return (
@@ -114,12 +117,18 @@ function UpdateProfile() {
             type="email"
             placeholder="Email"
           />
+          {errors.email?.message && (
+            <FormError errorMessage={errors.email.message} />
+          )}
           <input
             {...register("password")}
             className="input"
             type="password"
             placeholder="Password"
           />
+          {errors.password?.message && (
+            <FormError errorMessage={errors.password.message} />
+          )}
           <Button
             loading={loading}
             canClick={isValid}
