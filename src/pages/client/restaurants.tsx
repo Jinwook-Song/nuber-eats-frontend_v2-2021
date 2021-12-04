@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import AllRestaurants from "../../components/all-restaurants";
 import Banner from "../../components/banner";
-import Category from "../../components/category";
+import AllCategories from "../../components/all-categories";
 import {
   RestaurantsPageQuery,
   RestaurantsPageQueryVariables,
@@ -75,8 +75,8 @@ function Restaurants() {
             className="grid w-3/4 self-center sm:grid-cols-2 sm:w-5/6  md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-hidden"
             style={{ height: showAllCategory ? "auto" : "7rem" }}
           >
-            {data?.allCategories.categories?.map(({ name, coverImg }) => (
-              <Category key={name} name={name} coverImg={coverImg} />
+            {data?.allCategories.categories?.map(({ name, coverImg, slug }) => (
+              <AllCategories key={name} name={name} coverImg={coverImg} slug={slug} />
             ))}
           </div>
 
