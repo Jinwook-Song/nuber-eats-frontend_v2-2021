@@ -3,6 +3,7 @@ import { authTokenVar, isLoggedInVar } from "../apollo";
 import Header from "../components/header";
 import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
+import Restaurant from "../pages/client/restaurant";
 import Search from "../pages/client/search";
 import CategoryRestauratns from "../pages/client/category-restaurants";
 import ConfirmEmail from "../pages/user/confirm-email";
@@ -18,6 +19,7 @@ const ClientRoutes = () => {
       <Route path="/edit-profile" element={<UpdateProfile />} />;
       <Route path="/search" element={<Search />} />;
       <Route path="/category/:slug" element={<CategoryRestauratns />} />;
+      <Route path="/restaurants/:id" element={<Restaurant />} />;
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
     </Routes>
   );

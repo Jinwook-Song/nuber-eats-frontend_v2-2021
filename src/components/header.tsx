@@ -1,7 +1,7 @@
 import Logo from "../images/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useMatch } from "react-router-dom";
 import useMyProfile from "../hooks/useMyProfile";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import { UBER_AUTH_TOKEN } from "../types";
@@ -15,6 +15,7 @@ interface IFormProps {
 function Header() {
   const { data, refetch } = useMyProfile();
   const [scrollY, setScrollY] = useState(0);
+  const isDetailPage = Boolean(useMatch("/restaurants/:id"));
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,7 +77,7 @@ function Header() {
               placeholder="Search Restaurants..."
               className="w-full p-4 focus:outline-none border-b-2 text-lime-600 bg-gray-100 focus:bg-gray-300 focus:placeholder-gray-50 transition-colors "
               style={{
-                opacity: scrollY >= 500 ? "1" : "0",
+                opacity: isDetailPage || scrollY >= 500 ? "1" : "0",
                 transition: "opacity 0.5s ease-in-out",
               }}
             />

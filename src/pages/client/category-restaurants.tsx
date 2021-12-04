@@ -76,7 +76,7 @@ function CategoryRestauratns() {
                     {data.category.totalResults === 1
                       ? "1 restaurant is"
                       : `${data.category.totalResults} restaurants are`}{" "}
-                    serviced in "{category}".
+                    serviced in <br className="sm:hidden" />"{category}".
                   </h3>
                   <hr className="m-10 w-full self-center" />
                   <div className="cursor-pointer grid md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -125,7 +125,7 @@ function CategoryRestauratns() {
           )}
         </>
       ) : (
-        <NotFound />
+        <>{!loading && <NotFound />}</>
       )}
     </>
   );
