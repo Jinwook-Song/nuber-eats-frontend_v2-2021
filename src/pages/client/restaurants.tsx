@@ -10,7 +10,7 @@ import {
   RestaurantsPageQuery,
   RestaurantsPageQueryVariables,
 } from "../../__generated__/RestaurantsPageQuery";
-import { RESTAURANT_FRAGMENT } from "../../fragments";
+import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from "../../fragments";
 
 const RESTAURANTS_QUERY = gql`
   query RestaurantsPageQuery($input: RestaurantsInput!) {
@@ -18,11 +18,7 @@ const RESTAURANTS_QUERY = gql`
       ok
       error
       categories {
-        id
-        name
-        coverImg
-        slug
-        restaurantCount
+        ...CategoryParts
       }
     }
     restaurants(input: $input) {
@@ -36,6 +32,7 @@ const RESTAURANTS_QUERY = gql`
     }
   }
   ${RESTAURANT_FRAGMENT}
+  ${CATEGORY_FRAGMENT}
 `;
 
 function Restaurants() {
@@ -76,7 +73,12 @@ function Restaurants() {
             style={{ height: showAllCategory ? "auto" : "7rem" }}
           >
             {data?.allCategories.categories?.map(({ name, coverImg, slug }) => (
-              <AllCategories key={name} name={name} coverImg={coverImg} slug={slug} />
+              <AllCategories
+                key={name}
+                name={name}
+                coverImg={coverImg}
+                slug={slug}
+              />
             ))}
           </div>
 

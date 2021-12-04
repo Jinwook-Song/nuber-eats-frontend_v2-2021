@@ -12,8 +12,8 @@ import {
 const SEARCH_RESTAURANT_QUERY = gql`
   query SearchRestaurant($input: SearchRestaurantInput!) {
     searchRestaurant(input: $input) {
-      error
       ok
+      error
       totalPages
       totalResults
       restaurants {

@@ -4,7 +4,7 @@ import Header from "../components/header";
 import useMyProfile from "../hooks/useMyProfile";
 import Restaurants from "../pages/client/restaurants";
 import Search from "../pages/client/search";
-import Category from "../pages/client/category";
+import CategoryRestauratns from "../pages/client/category-restaurants";
 import ConfirmEmail from "../pages/user/confirm-email";
 import UpdateProfile from "../pages/user/edit-profile";
 import { UBER_AUTH_TOKEN } from "../types";
@@ -17,7 +17,7 @@ const ClientRoutes = () => {
       <Route path="/confirm" element={<ConfirmEmail />} />;
       <Route path="/edit-profile" element={<UpdateProfile />} />;
       <Route path="/search" element={<Search />} />;
-      <Route path="/category/:slug" element={<Category />} />;
+      <Route path="/category/:slug" element={<CategoryRestauratns />} />;
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
     </Routes>
   );

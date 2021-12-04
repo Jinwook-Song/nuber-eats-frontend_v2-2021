@@ -26,8 +26,8 @@ export interface SearchRestaurant_searchRestaurant_restaurants {
 
 export interface SearchRestaurant_searchRestaurant {
   __typename: "SearchRestaurantOutput";
-  error: string | null;
   ok: boolean;
+  error: string | null;
   totalPages: number | null;
   totalResults: number | null;
   restaurants: SearchRestaurant_searchRestaurant_restaurants[] | null;
