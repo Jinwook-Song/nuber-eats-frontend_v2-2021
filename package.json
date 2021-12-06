@@ -37,8 +37,8 @@
     "start": "npm run tailwind:build & react-scripts start",
     "start:dev": "react-scripts start",
     "apollo:codegen": "rm -rf src/__generated__ && apollo client:codegen src/__generated__ --target=typescript --outputFlat",
-    "build": "CI=false react-scripts prod",
-    "prebuild": "npm run tailwind:build",
+    "build": "CI=false react-scripts",
+    "prebuild": "npm run tailwind:prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
