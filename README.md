@@ -145,6 +145,5 @@
 
 ## 🚀 Deployment
 
-- [x] Frontend_v1: [Netlify](https://optimistic-mestorf-dbd1fd.netlify.app/)
-- [x] Frontend_v2: [Netlify](https://optimistic-mestorf-dbd1fd.netlify.app/)
+- [x] Frontend: [Netlify](https://optimistic-mestorf-dbd1fd.netlify.app/)
 - [x] Backend: [Heroku](https://nuber-eats-backend-2021.herokuapp.com/graphql)
