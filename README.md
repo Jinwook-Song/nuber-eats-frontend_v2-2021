@@ -1,46 +1,149 @@
-# Getting Started with Create React App
+# Uber-Eats-Frontend with NestJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🖥 Preview
 
-## Available Scripts
+| Feature |                                                                                                                                                                                                                                                                                        Views                                                                                                                                                                                                                                                                                         |
+| :-----: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  Page   | <img widtH="300" height="300" src="https://user-images.githubusercontent.com/78011042/144832413-253dd44c-e1ee-4b2d-a648-a908014a7a99.png"/> <img widtH="300" height="300" src="https://user-images.githubusercontent.com/78011042/144832554-d28c3598-18e1-470a-9335-d940454a2801.png"/> <br> <img widtH="300" height="300" src="https://user-images.githubusercontent.com/78011042/144832969-a674091f-e8ed-4cad-aa88-765c350b3d55.png"/> <img widtH="300" height="300" src="https://user-images.githubusercontent.com/78011042/144833143-b55a2bf8-f910-4970-b4f1-962129f8077a.png"/> |
 
-In the project directory, you can run:
+## 🛠 Stack
 
-### `npm start`
+### Frontend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img height="30" src="https://img.shields.io/badge/React-black?style=for-the-badge&logo=React&logoColor=#61DAFB"/> <img height="30" src="https://img.shields.io/badge/Typescript-black?style=for-the-badge&logo=Typescript&logoColor=3178C6"/>
+<img height="30" src="https://img.shields.io/badge/TailwindCSS-black?style=for-the-badge&logo=TailwindCSS&logoColor=06B6D4"/>
+<img height="30" src="https://img.shields.io/badge/Netlify-black?style=for-the-badge&logo=Netlify&logoColor=00C7B7"/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Backend
 
-### `npm test`
+<img height="30" src="https://img.shields.io/badge/Nodejs-339933?style=for-the-badge&logo=Node.js&logoColor=white"/> <img height="30" src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=NestJS&logoColor=white"/>
+<img height="30" src="https://img.shields.io/badge/GraphQL-E434AA?style=for-the-badge&logo=GraphQL&logoColor=white"/>
+<img height="30" src="https://img.shields.io/badge/Apollo GraphQL-311C87?style=for-the-badge&logo=ApolloGraphQL&logoColor=white"/>
+<img height="30" src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=PostgreSQL&logoColor=white"/>
+<img height="30" src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=Heroku&logoColor=white"/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Testing
 
-### `npm run build`
+<img height="30" src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=Jest&logoColor=white"/> <img height="30" src="https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=Cypress&logoColor=white"/>
+<img height="30" src="https://img.shields.io/badge/Testing Library-E33332?style=for-the-badge&logo=Testing Library&logoColor=white"/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📦 Packages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [x] React
+- [x] Typescript
+- [x] Apollo
+- [x] TailwindCSS
+- [x] NodeJS
+- [x] NestJS
+- [x] GraphQL
+- [x] PostgreSQL
+- [x] TypeORM
+- [x] Jest
+- [ ] Cypress
+- [x] React Testing Library
+- [x] Mailgun
+- [x] Victory
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📖 NestJS Concepts
 
-### `npm run eject`
+- [x] Module
+- [x] Guard
+- [x] Middleware
+- [x] Decorator
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## ⚙ Features
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [x] Online Payment
+- [x] Google Map
+- [x] Unit Testing
+- [x] End to End Testing
+- [x] Data Visualization
+- [x] JWT Authentication
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 🙎‍♂️ User
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [x] User Authentication
+- [x] Email Verification
+- [x] Photo Upload
+- [x] User, Restaurant Owner, Delivery Man Profile
 
-## Learn More
+### 🍕 Restaurant
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [x] Restaurant CRUD
+- [x] Dish CRUD
+- [x] Realtime Order Notification
+- [x] Sales Dashboard (Data Visualization)
+- [x] Premium Feature (Online Payment)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📰 Data Model & CRUD
+
+### User Model:
+
+- id
+- createdAt
+- updatedAt
+- email
+- password
+- role(client|owner|delivery)
+
+### User CRUD:
+
+- Create Account
+- Log In
+- See Profile
+- Edit Profile
+- Verify Email
+
+### Restaurant Model:
+
+- name
+- category
+- address
+- coverImage
+
+### Restaurant CRUD:
+
+- See Categories
+- See Restaurants by Category (pagination)
+- See Restaurants (pagination)
+- See Restaurant
+- Edit Restaurant
+- Delete Restaurant
+- Search Restaurant
+
+### Dish CRUD:
+
+- Create Dish
+- Edit Dish
+- Delete Dish
+
+### Orders CRUD:
+
+- Orders Subscription:
+  - Pending Orders
+    - listen: newOrder,
+    - trigger: createOrder(new Order)
+  - Pending Pickup Order
+    - listen: orderUpdate
+    - trigger: editOrder(orderUpdate)
+  - Order Status
+    - listen: orderUpdate
+    - trigger: editOrder(orderUpdate)
+
+### Payments (CRON)
+
+## ⏳ More Todos
+
+- [ ] implement category page like restaurant
+- [ ] implement search page
+- [ ] unit test for 100% coverage
+- [ ] edit restaurant
+- [ ] add choice options in create dish
+- [ ] if order exist, show the order details
+- [ ] add delivery address to the order
+- [ ] logout
+
+## 🚀 Deployment
+
+- [x] Frontend: [Netlify]https://optimistic-mestorf-dbd1fd.netlify.app/)
+- [x] Backend: [Heroku](https://nuber-eats-backend-2021.herokuapp.com/graphql)
