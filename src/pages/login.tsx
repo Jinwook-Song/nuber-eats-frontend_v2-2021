@@ -48,7 +48,7 @@ function Login() {
       localStorage.setItem(UBER_AUTH_TOKEN, token!);
       authTokenVar(token);
       isLoggedInVar(true);
-      navigate("/");
+      navigate("/", {replace: true});
     }
   };
 
