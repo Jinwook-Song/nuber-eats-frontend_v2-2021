@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormError from "../components/form-error";
 import Logo from "../images/logo.svg";
 import {
@@ -29,6 +29,7 @@ interface ILoginForm {
 }
 
 function Login() {
+  const navigate = useNavigate();
   const {
     register,
     getValues,
@@ -47,6 +48,7 @@ function Login() {
       localStorage.setItem(UBER_AUTH_TOKEN, token!);
       authTokenVar(token);
       isLoggedInVar(true);
+      navigate("/");
     }
   };
 
