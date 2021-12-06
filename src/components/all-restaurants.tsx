@@ -12,11 +12,10 @@ function AllRestaurants({
     <Link to={`/restaurants/${id}`}>
       <div className="w-full h-40 grid grid-cols-5 overflow-hidden hover:bg-yellow-50 transition-colors">
         <img
-          className="col-span-3 w-full h-full"
+          className="col-span-3 w-full h-full bg-center"
           src={coverImg}
           style={{
             backgroundSize: "cover",
-            backgroundPosition: "right top",
           }}
           alt={name}
         />
