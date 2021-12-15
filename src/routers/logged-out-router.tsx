@@ -8,10 +8,10 @@ function LoggedOutRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="login" element={<Login />} />
+          <Route path="create-account" element={<CreateAccount />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
