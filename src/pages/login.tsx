@@ -73,12 +73,15 @@ function Login() {
     }
   };
   return (
-    <div className="h-screen flex flex-col items-center justify-center mt-7 lg:mt-32 bg-red-300">
+    <div className="h-full flex items-center flex-col mt-7 lg:mt-32 ">
       <Helmet>
         <title>Login | Uber Eats</title>
       </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col items-center px-5">
-        {/* <img src={Logo} alt="uber eats" className="w-48 mb-9" /> */}
+        <div className="w-48 mb-9">
+          <img src={Logo} alt="uber eats" />
+          <svg />
+        </div>
         <h4 className="w-full font-medium text-left text-2xl mb-7">
           돌아오신 것을 환영합니다
         </h4>
