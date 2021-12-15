@@ -73,7 +73,7 @@ function Login() {
     }
   };
   return (
-    <div className="h-screen flex items-center flex-col mt-7 lg:mt-32 ">
+    <div className="h-96 flex items-center flex-col mt-7 lg:mt-32 ">
       <Helmet>
         <title>Login | Uber Eats</title>
       </Helmet>
