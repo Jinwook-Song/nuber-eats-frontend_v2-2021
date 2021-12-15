@@ -20,7 +20,7 @@ function Header() {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, [data, refetch]);
 
   // logout
   const onClick = () => {

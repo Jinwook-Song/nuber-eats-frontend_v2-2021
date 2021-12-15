@@ -46,7 +46,9 @@ function LoggedInRouter() {
   return (
     <BrowserRouter>
       <Header />
-      {myProfileResult.myProfile.role === UserRole.Client && <ClientRoutes />}
+      {!loading && myProfileResult.myProfile.role === UserRole.Client && (
+        <ClientRoutes />
+      )}
     </BrowserRouter>
   );
 }
