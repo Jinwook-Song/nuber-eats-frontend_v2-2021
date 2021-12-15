@@ -78,7 +78,9 @@ function CreateAccount() {
         <title>Create Account | Uber Eats</title>
       </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col items-center px-5">
-        <img src={Logo} alt="uber eats" className="w-48 mb-9" />
+        <div className="mb-9">
+          <img src={Logo} alt="uber eats" style={{ height: "2rem" }} />
+        </div>
         <h4 className="w-full font-medium text-left text-2xl mb-7">시작하기</h4>
         <h6 className="w-full font-light text-left text-sm mb-2">
           이메일을 입력하세요(필수)
