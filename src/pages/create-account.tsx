@@ -73,7 +73,7 @@ function CreateAccount() {
     }
   };
   return (
-    <div className="h-full flex items-center flex-col mt-7 lg:mt-32 ">
+    <div className="h-screen flex items-center flex-col mt-7 lg:mt-32 ">
       <Helmet>
         <title>Create Account | Uber Eats</title>
       </Helmet>
