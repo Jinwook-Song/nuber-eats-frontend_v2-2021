@@ -10,6 +10,7 @@ import ConfirmEmail from "../pages/user/confirm-email";
 import UpdateProfile from "../pages/user/edit-profile";
 import { UBER_AUTH_TOKEN } from "../types";
 import { UserRole } from "../__generated__/globalTypes";
+import { useEffect } from "react";
 
 const ClientRoutes = () => {
   return (
@@ -26,7 +27,8 @@ const ClientRoutes = () => {
 };
 
 function LoggedInRouter() {
-  const { error, loading, data: myProfileResult } = useMyProfile();
+  const { error, loading, data: myProfileResult, refetch } = useMyProfile();
+  console.log(myProfileResult);
 
   // invalid Token
   if (error) {
@@ -34,6 +36,10 @@ function LoggedInRouter() {
     authTokenVar(null);
     isLoggedInVar(false);
   }
+
+  useEffect(() => {
+    refetch();
+  }, [myProfileResult, refetch]);
 
   if (!myProfileResult || loading) {
     return (
