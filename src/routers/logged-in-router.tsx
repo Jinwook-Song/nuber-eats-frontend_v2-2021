@@ -11,6 +11,7 @@ import UpdateProfile from "../pages/user/edit-profile";
 import { UBER_AUTH_TOKEN } from "../types";
 import { UserRole } from "../__generated__/globalTypes";
 import { useEffect } from "react";
+import Loading from "../components/loading";
 
 const ClientRoutes = () => {
   return (
@@ -41,11 +42,7 @@ function LoggedInRouter() {
   }, [myProfileResult, refetch]);
 
   if (!myProfileResult || loading) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <span className="font-medium text-xl tracking-wider">Loading...</span>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

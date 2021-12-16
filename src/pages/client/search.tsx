@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
 import AllRestaurants from "../../components/all-restaurants";
 import Banner from "../../components/banner";
+import Loading from "../../components/loading";
 import { RESTAURANT_FRAGMENT } from "../../fragments";
 import {
   SearchRestaurant,
@@ -53,6 +54,10 @@ function Search() {
 
   const onNextPageClick = () => setPage((current) => current + 1);
   const onPrevPageClick = () => setPage((current) => current - 1);
+
+  if (!data || loading) {
+    return <Loading />;
+  }
 
   return (
     <>

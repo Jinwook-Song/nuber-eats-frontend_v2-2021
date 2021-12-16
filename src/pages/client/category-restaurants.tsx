@@ -7,6 +7,7 @@ import Banner from "../../components/banner";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import NotFound from "../404";
+import Loading from "../../components/loading";
 
 const CATEGORY_QUERY = gql`
   query Category($input: CategoryInput!) {
@@ -57,6 +58,10 @@ function CategoryRestauratns() {
 
   const onNextPageClick = () => setPage((current) => current + 1);
   const onPrevPageClick = () => setPage((current) => current - 1);
+
+  if (!data || loading) {
+    return <Loading />;
+  }
 
   return (
     <>

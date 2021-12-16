@@ -7,6 +7,7 @@ import {
   RestaurantInfoVariables,
 } from "../../__generated__/RestaurantInfo";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../components/loading";
 
 const RESTAURANT_QUERY = gql`
   query RestaurantInfo($input: RestaurantInput!) {
@@ -33,6 +34,11 @@ function Restaurant() {
       },
     }
   );
+
+  if (!data || loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Spacing />
