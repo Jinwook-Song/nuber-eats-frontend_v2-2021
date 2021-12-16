@@ -11,7 +11,6 @@ import {
   RestaurantsPageQueryVariables,
 } from "../../__generated__/RestaurantsPageQuery";
 import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from "../../fragments";
-import { useLocation } from "react-router-dom";
 
 const RESTAURANTS_QUERY = gql`
   query RestaurantsPageQuery($input: RestaurantsInput!) {
@@ -39,8 +38,6 @@ const RESTAURANTS_QUERY = gql`
 function Restaurants() {
   const [page, setPage] = useState(1);
   const [showAllCategory, setShowAllCategory] = useState(false);
-  const location = useLocation();
-  console.log(location);
   const { data, loading } = useQuery<
     RestaurantsPageQuery,
     RestaurantsPageQueryVariables

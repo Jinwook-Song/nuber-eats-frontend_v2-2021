@@ -28,7 +28,6 @@ const ClientRoutes = () => {
 
 function LoggedInRouter() {
   const { error, loading, data: myProfileResult, refetch } = useMyProfile();
-  console.log(myProfileResult);
 
   // invalid Token
   if (error) {
