@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import Spacing from "../../components/spacing";
 import { RESTAURANT_FRAGMENT } from "../../fragments";
@@ -23,6 +23,7 @@ const RESTAURANT_QUERY = gql`
 `;
 
 function Restaurant() {
+  const navigate = useNavigate();
   const params = useParams();
   const { loading, data } = useQuery<RestaurantInfo, RestaurantInfoVariables>(
     RESTAURANT_QUERY,
@@ -48,12 +49,19 @@ function Restaurant() {
         </Helmet>
         {!loading && (
           <div
-            className="bg-center bg-cover h-96 flex flex-col justify-end p-5"
+            className="bg-center bg-cover h-96 flex flex-col justify-end p-5 relative"
             style={{
               color: "#CBCBCB",
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url(${data?.restaurant.restaurant?.coverImg})`,
             }}
           >
+            <span
+              className="absolute top-0 py-3 text-2xl font-semibold  cursor-pointer "
+              onClick={() => navigate(-1)}
+            >
+              &larr;
+            </span>
+
             <h4 className="text-base sm:text-2xl xl:text-4xl mb-3">
               {data?.restaurant.restaurant?.name} •{" "}
               {data?.restaurant.restaurant?.category?.name}
